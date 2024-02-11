@@ -50,7 +50,7 @@ function BookList({books, translation}: {books: Book[], translation: string}) {
                     <h3 className="text-center font-bold mb-4">{testament.testamentName}</h3>
                     <ul>
                         {testament.bookNames.map((element, index) => (
-                            <Link key={index} href={"/" + translation + "/" + element.book.replace(" ", "-")}><li className="m-2"><Button key={index} className="w-72" variant={"outline"}>{element.book_name}</Button></li></Link>
+                            <Link key={index} href={"/" + translation + "/" + element.book.replace(" ", "-")}><li className="my-2"><Button key={index} className="w-72" variant={"outline"}>{element.book_name}</Button></li></Link>
                         ))}
                     </ul>
                 </div>
