@@ -59,7 +59,7 @@ function BookList({books}: {books: Book[]}) {
     ) 
 }
 
-export default async function Page({ params }) {
+export default async function Page({ params }: {params: Params}) {
     const res = await fetch(`${API_URL}/${params.translation}/books`);
     const books = await res.json()
     return (
