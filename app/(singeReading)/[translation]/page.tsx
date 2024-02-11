@@ -44,16 +44,16 @@ function BreadcrumbWithRoutingLibrary({translation} : {translation: string}) {
 function BookList({books, translation}: {books: Book[], translation: string}) {
     const splitBooks = [{"testamentName": books[0]["testament_name"], "bookNames": books.slice(0, 39)}, {"testamentName": books[65]["testament_name"], "bookNames": books.slice(39, 66)}]
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 m-4">
-            {splitBooks.map((testament, index) => (
-                <div className="m-4 w-72 mx-auto">
-                <h3 className="text-center font-bold mb-4">{testament.testamentName}</h3>
-                <ul>
-                    {testament.bookNames.map((element, index) => (
-                        <Link key={index} href={"/" + translation + "/" + element.book.replace(" ", "-")}><li className="m-2"><Button key={index} className="w-72" variant={"outline"}>{element.book_name}</Button></li></Link>
-                    ))}
-                </ul>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2">
+            {splitBooks.map((testament, mainindex) => (
+                <div key={mainindex} className="m-4 w-72 mx-auto">
+                    <h3 className="text-center font-bold mb-4">{testament.testamentName}</h3>
+                    <ul>
+                        {testament.bookNames.map((element, index) => (
+                            <Link key={index} href={"/" + translation + "/" + element.book.replace(" ", "-")}><li className="m-2"><Button key={index} className="w-72" variant={"outline"}>{element.book_name}</Button></li></Link>
+                        ))}
+                    </ul>
+                </div>
             ))}
         </div>
     ) 
@@ -64,7 +64,7 @@ export default async function Page({ params }: {params: Params}) {
     const books = await res.json()
     return (
         <div>
-            <div className="mt-4">
+            <div className="m-4">
                 <BreadcrumbWithRoutingLibrary translation={params.translation} />
             </div>
             <div>
