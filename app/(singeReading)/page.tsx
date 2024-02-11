@@ -98,7 +98,7 @@ export default async function HomePage() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2">
         {translations.map((translation: Translation, index: number) => (
-          <div key={index} className="m-4 w-80">{cardWithTranslation(translation)}</div>
+          <div key={index} className="m-4 ml-6 w-80">{cardWithTranslation(translation)}</div>
         ))}
       </div>
       <div className="my-8 mx-auto md:w-7/12">

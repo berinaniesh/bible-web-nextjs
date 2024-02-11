@@ -1,3 +1,3 @@
 export default function Parallel() {
-    return "Parallel reading"
+    return "Parallel reading (Not implemented yet)."
 }
