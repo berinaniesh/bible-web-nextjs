@@ -25,7 +25,7 @@ type Translation = {
   description: string
 }
 
-const footerElements = [{"key": "about", "text": "About"}, {"key": "alternate-uis", "text": "Alternate UIs"}, {"key": "changelog", "text": "Changelog"}, {"key": "source", "text": "Source"}]
+const footerElements = [{"key": "about", "text": "About"}, {"key": "alternate-uis", "text": "Alternate UIs"}, {"key": "changelog", "text": "Changelog"}]
 
 async function getTranslations() {
   const res = await fetch(`${API_URL}/translations`);
@@ -59,8 +59,9 @@ function Footer() {
     <div>
       <ul className="flex text-slate-500">
         {footerElements.map((element, index) => (
-          <Link href={"/" + element.key}><li className="mx-4 hover:underline" key={index}>{element.text}</li></Link>
+          <Link className="mx-4 hover:underline" key={index} href={"/" + element.key}><li>{element.text}</li></Link>
         ))}
+        <a className="mx-4 hover:underline" target="blank" href="https://github.com/berinaniesh/bible-web-nextjs"><li>Source</li></a>
       </ul>
     </div>
   )
