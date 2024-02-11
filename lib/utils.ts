@@ -24,7 +24,8 @@ export function getCrumb(str: string, isTranslation: boolean) {
 }
 
 export async function getNav(book: string, chapter: number) {
-  const currentPage = {"book": book, "chapter": chapter}
+  //@ts-ignore
+  const currentPage = {"book": book, "chapter": parseInt(chapter)}
   const res = await fetch(`${API_URL}/nav`, {
     method: "POST",
     headers: {"Content-Type": "application/json", "Accept": "*/*"},
