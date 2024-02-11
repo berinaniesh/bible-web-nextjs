@@ -11,3 +11,13 @@ export function getValidChildren(children: React.ReactNode) {
     React.isValidElement(child)
   ) as React.ReactElement[]
 }
+
+export function getCrumb(str: string, isTranslation: boolean) {
+  if (isTranslation) {
+    return str.toUpperCase();
+  } else {
+    return str.replace("-", " ").split(' ')
+    .map(w => w[0].toUpperCase() + w.substring(1).toLowerCase())
+    .join(' ').replace("Uis", "UIs");
+  }
+}

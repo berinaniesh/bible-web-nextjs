@@ -39,7 +39,7 @@ export function BreadcrumbWithRoutingLibrary() {
       <BreadcrumbItem>
         <BreadcrumbLink as={Link} className="flex items-center gap-2" href="/">
           <Home/>
-          <span className="inline-block font-bold">Home</span>
+          <span className="inline-block font-bold ">Home</span>
         </BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>
@@ -86,7 +86,7 @@ function cardWithTranslation(translation: Translation) {
 
 }
 
-export default async function HomePage() {
+export default async function Page() {
   const translations = await getTranslations();
   return (
     <div>

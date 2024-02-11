@@ -1,4 +1,6 @@
 import { API_URL } from "@/lib"
+import { getCrumb } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 type Params = {
     translation: string
@@ -12,7 +14,16 @@ import {
   BreadcrumbLink,
 } from "@/components/ui/breadcrumb"
 
-function BreadcrumbWithRoutingLibrary({translation}) {
+type Book = {
+    book_id: number,
+    book: string,
+    book_name: string,
+    abbreviation: string,
+    testament: string,
+    testament_name: string
+}
+
+function BreadcrumbWithRoutingLibrary({translation} : {translation: string}) {
     return (
       <Breadcrumb>
         <BreadcrumbItem>
@@ -23,20 +34,42 @@ function BreadcrumbWithRoutingLibrary({translation}) {
         </BreadcrumbItem>
         <BreadcrumbItem>
         <BreadcrumbLink as={Link} className="flex items-center gap-2" href={translation}>
-            <span className="inline-block font-bold">{translation.toUpperCase()}</span>
+            <span className="inline-block font-bold">{getCrumb(translation, true)}</span>
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
     )
-  }
+}
+
+function BookList({books}: {books: Book[]}) {
+    const splitBooks = [{"testamentName": books[0]["testament_name"], "bookNames": books.slice(0, 39)}, {"testamentName": books[65]["testament_name"], "bookNames": books.slice(39, 66)}]
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-2 m-4">
+            {splitBooks.map((testament, index) => (
+                <div className="m-4 w-72 mx-auto">
+                <h3 className="text-center font-bold mb-4">{testament.testamentName}</h3>
+                <ul>
+                    {testament.bookNames.map((element, index) => (
+                        <li className="m-2"><Button className="w-72" variant={"outline"}>{element.book_name}</Button></li>
+                    ))}
+                </ul>
+            </div>
+            ))}
+        </div>
+    ) 
+}
 
 export default async function Page({ params }) {
     const res = await fetch(`${API_URL}/${params.translation}/books`);
     const books = await res.json()
-    const translation = params.translation
     return (
-        <div className="my-4">
-            <BreadcrumbWithRoutingLibrary translation={params.translation} />
+        <div>
+            <div className="mt-4">
+                <BreadcrumbWithRoutingLibrary translation={params.translation} />
+            </div>
+            <div>
+                <BookList books={books} />
+            </div>
         </div>
     )
 }
