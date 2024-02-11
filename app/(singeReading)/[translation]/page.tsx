@@ -41,7 +41,7 @@ function BreadcrumbWithRoutingLibrary({translation} : {translation: string}) {
     )
 }
 
-function BookList({books}: {books: Book[]}) {
+function BookList({books, translation}: {books: Book[], translation: string}) {
     const splitBooks = [{"testamentName": books[0]["testament_name"], "bookNames": books.slice(0, 39)}, {"testamentName": books[65]["testament_name"], "bookNames": books.slice(39, 66)}]
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 m-4">
@@ -50,7 +50,7 @@ function BookList({books}: {books: Book[]}) {
                 <h3 className="text-center font-bold mb-4">{testament.testamentName}</h3>
                 <ul>
                     {testament.bookNames.map((element, index) => (
-                        <li className="m-2"><Button className="w-72" variant={"outline"}>{element.book_name}</Button></li>
+                        <Link key={index} href={"/" + translation + "/" + element.book.replace(" ", "-")}><li className="m-2"><Button key={index} className="w-72" variant={"outline"}>{element.book_name}</Button></li></Link>
                     ))}
                 </ul>
             </div>
@@ -68,7 +68,7 @@ export default async function Page({ params }: {params: Params}) {
                 <BreadcrumbWithRoutingLibrary translation={params.translation} />
             </div>
             <div>
-                <BookList books={books} />
+                <BookList books={books} translation={params.translation} />
             </div>
         </div>
     )
