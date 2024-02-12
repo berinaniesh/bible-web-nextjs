@@ -33,7 +33,7 @@ async function getTranslations() {
   return translations
 }
 
-export function BreadcrumbWithRoutingLibrary() {
+function BreadcrumbWithRoutingLibrary() {
   return (
     <Breadcrumb>
       <BreadcrumbItem>
