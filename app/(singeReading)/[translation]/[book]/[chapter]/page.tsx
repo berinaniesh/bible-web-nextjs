@@ -1,4 +1,3 @@
-import { getBookDetails } from "../page";
 import { getNav } from "@/lib/utils";
 import { getCrumb } from "@/lib/utils";
 import Link from "next/link";
@@ -20,6 +19,14 @@ type Params = {
 type Verse = {
     verse_number: number,
     verse: string
+}
+
+export async function getBookDetails(translation: string, book: string) {
+  const res = await fetch(`${API_URL}/${translation}/books`)
+  const books = await res.json()
+  //@ts-ignore
+  const bookToReturn = books.find(obj => obj["book"] === book); 
+  return bookToReturn;
 }
 
 function BreadcrumbWithRoutingLibrary({translation, book, chapter} : {translation: string, book: string, chapter: number}) {
