@@ -21,7 +21,7 @@ type Verse = {
     verse: string
 }
 
-export async function getBookDetails(translation: string, book: string) {
+async function getBookDetails(translation: string, book: string) {
   const res = await fetch(`${API_URL}/${translation}/books`)
   const books = await res.json()
   //@ts-ignore
